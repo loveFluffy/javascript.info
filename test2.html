@@ -1,0 +1,70 @@
+<html>
+<body>
+	<div>Users:</div>
+	<ul>
+		<li>John</li>
+		<li>Pete</li>
+	</ul>
+	<table id="Table">
+		<tr>
+			<td>1:1</td>
+			<td>1:2</td>
+			<td>1:3</td>
+			<td>1:4</td>
+			<td>1:5</td>
+		</tr>
+		<tr>
+			<td>2:1</td>
+			<td>2:2</td>
+			<td>2:3</td>
+			<td>2:4</td>
+			<td>2:5</td>
+		</tr>
+		<tr>
+			<td>3:1</td>
+			<td>3:2</td>
+			<td>3:3</td>
+			<td>3:4</td>
+			<td>3:5</td>
+		</tr>
+		<tr>
+			<td>4:1</td>
+			<td>4:2</td>
+			<td>4:3</td>
+			<td>4:4</td>
+			<td>4:5</td>
+		</tr>
+		<tr>
+			<td>5:1</td>
+			<td>5:2</td>
+			<td>5:3</td>
+			<td>5:4</td>
+			<td>5:5</td>
+		</tr>
+	</table>
+</body>
+<script>
+	// DOM 子节点
+	// 对于以下各项，请给出至少一种访问方式：
+	// <div> DOM 节点？
+	// let div = document.body.firstElementChild;
+	// alert(div);
+	// // <ul> DOM 节点？
+	// let ul = div.nextElementSibling;
+	// alert(ul);
+	// // 第二个 < li > 节点（即包含 Pete 的节点）？
+	// alert(ul.lastElementChild);
+
+	// alert(table.rows[0].cells[1].innerHTML)
+
+	// 选择所有对角单元格
+	// 编写代码来把表格中的对角单元格都绘制成红色。
+	// 你需要用代码从 <table> 中获取所有的对角单元格 <td>，然后绘制它们：
+	// td 表示的是对单元格的引用
+	Table.style.backgroundColor = "red";
+
+
+
+
+</script>
+</html>
