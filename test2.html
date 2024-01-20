@@ -7,7 +7,7 @@
 	</ul>
 	<table id="Table">
 		<tr>
-			<td>1:1</td>
+			<td id="td">1:1</td>
 			<td>1:2</td>
 			<td>1:3</td>
 			<td>1:4</td>
@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<td>2:1</td>
-			<td>2:2</td>
+			<td id="td">2:2</td>
 			<td>2:3</td>
 			<td>2:4</td>
 			<td>2:5</td>
@@ -23,7 +23,7 @@
 		<tr>
 			<td>3:1</td>
 			<td>3:2</td>
-			<td>3:3</td>
+			<td id="td">3:3</td>
 			<td>3:4</td>
 			<td>3:5</td>
 		</tr>
@@ -31,7 +31,7 @@
 			<td>4:1</td>
 			<td>4:2</td>
 			<td>4:3</td>
-			<td>4:4</td>
+			<td id="td">4:4</td>
 			<td>4:5</td>
 		</tr>
 		<tr>
@@ -39,7 +39,17 @@
 			<td>5:2</td>
 			<td>5:3</td>
 			<td>5:4</td>
-			<td>5:5</td>
+			<td id="td">5:5</td>
+		</tr>
+	</table>
+	<table id="table">
+		<tr>
+			<td>One</td>
+			<td>Two</td>
+		</tr>
+		<tr>
+			<td>Three</td>
+			<td>Four</td>
 		</tr>
 	</table>
 </body>
@@ -55,13 +65,20 @@
 	// // 第二个 < li > 节点（即包含 Pete 的节点）？
 	// alert(ul.lastElementChild);
 
-	// alert(table.rows[0].cells[1].innerHTML)
+	// alert(table.rows[0].cells[1].innerHTML);
+	// table.rows[0].cells[1].style.backgroundColor = "red";
 
 	// 选择所有对角单元格
 	// 编写代码来把表格中的对角单元格都绘制成红色。
 	// 你需要用代码从 <table> 中获取所有的对角单元格 <td>，然后绘制它们：
 	// td 表示的是对单元格的引用
-	Table.style.backgroundColor = "red";
+	// for (let i = 0; i < Table.rows.length; i++) {
+	// 	Table.rows[i].cells[i].style.backgroundColor = "red";
+	// }
+
+	// ------------------------- 搜索：getElement*，querySelector* ------------------------- //
+	let table = document.getElementById("table");
+	table.style.backgroundColor = "green";
 
 
 

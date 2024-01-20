@@ -1623,6 +1623,785 @@
 
 // =========================== 解构赋值 =========================== //
 
+// Object
+// let obj = {
+// 	"key1": 1,
+// 	"key2": 2,
+// 	"key3": 3,
+// };
+// for (let [key, value] of Object.entries(obj)) {
+// 	alert(`${key},${value}`);
+// }
+
+// Map
+// let map = new Map();
+// map.set("key1", "value1");
+// map.set("key2", "value2");
+// map.set("key3", "value3");
+// for (let [key, value] of map) {
+// 	alert(`${key},${value}`);
+// }
+
+// 交换变量值的技巧
+// let val1 = 1;
+// let val2 = 2;
+// [val1, val2] = [val2, val1];
+// alert(val1 + ", " + val2);
+// 也可以用这种方式交换两个以上的变量
+
+// 默认值
+// let [name = "Guest", surname = "Anonymous"] = ["Tom"];
+// alert(name + ", " + surname);
+// let [name = prompt("name=?", "Guest"), surname = prompt("surname=?", "Anonymous")] = ["Tom"];
+// alert(name + ", " + surname);
+
+// 对象解构
+// let obj = {
+// 	"key1": 1,
+// 	"key2": 2,
+// 	"key3": 3,
+// };
+// let { key1, key2, key3 } = obj;
+// let { key3, key2, key1 } = obj; // 变量顺序不重要
+// let { key1: key4, key2: key5, key3: key6 } = obj; //改变变量名的方法
+// alert(key4 + ", " + key5 + ", " + key6);
+
+// 嵌套解构
+// let obj = {
+// 	size: {
+// 		width: 100,
+// 		height: 200,
+// 	},
+// 	items: ["Cake", "Donut"],
+// 	extra: true,
+// };
+// let {
+// 	size: {
+// 		width,
+// 		height,
+// 	},
+// 	items: [item1, item2],
+// 	extra,
+// } = obj;
+// alert(width);
+// alert(height);
+// alert(item1);
+// alert(item2);
+// alert(extra);
+// let { size } = obj;
+// alert(size.height);
+// alert(size.width);
+
+// 智能函数参数
+
+// 解构赋值
+// 我们有一个对象：
+// let user = {
+// 	name: "John",
+// 	years: 30
+// };
+// 写一个解构赋值语句使得：
+//     name 属性赋值给变量 name。
+//     years 属性赋值给变量 age。
+//     isAdmin 属性赋值给变量 isAdmin（如果属性缺失则取默认值 false）。
+// 下面是赋值完成后的值的情况：
+// let user = { name: "John", years: 30 };
+// // 等号左侧是你的代码
+// let { name, years: age, isAdmin = false } = user;
+// alert(name); // John
+// alert(age); // 30
+// alert(isAdmin); // false
+
+// 最高薪资
+// 这儿有一个 salaries 对象：
+// let salaries = {
+// 	"John": 100,
+// 	"Pete": 300,
+// 	"Mary": 250
+// };
+// 新建一个函数 topSalary(salaries)，返回收入最高的人的姓名。
+//     如果 salaries 是空的，函数应该返回 null。
+//     如果有多个收入最高的人，返回其中任意一个即可。
+// P.S. 使用 Object.entries 和解构语法来遍历键/值对。
+// function topSalary(salaries) {
+// 	let sal0 = 0;
+// 	let name0 = null;
+// 	for (let [name, sal] of Object.entries(salaries)) {
+// 		if (sal >= sal0) {
+// 			name0 = name;
+// 			sal0 = sal;
+// 		}
+// 	}
+// 	return name0;
+// }
+// alert(topSalary(salaries));
+// alert(topSalary({}));
+
+
+// =========================== 日期和时间 =========================== //
+
+// new Date() 不带参数 —— 创建一个表示当前日期和时间的 Date 对象
+// alert(new Date());
+
+// new Date(milliseconds) 创建一个 Date 对象，其时间等于 1970 年 1 月 1 日 UTC+0 之后经过的毫秒数（1/1000 秒）。
+// alert(new Date(24 * 3600 * 1000));
+// 我们通常使用 new Date(timestamp) 通过时间戳来创建日期，并可以使用 date.getTime() 将现有的 Date 对象转化为时间戳
+// 在 01.01.1970 之前的日期带有负的时间戳
+// alert(new Date(-24 * 3600 * 1000));
+// alert(new Date(0));
+
+// new Date(datestring) 如果只有一个参数，并且是字符串，那么它会被自动解析。该算法与 Date.parse 所使用的算法相同
+// alert(new Date("2017-10-10"));
+// 未指定具体时间，所以假定时间为格林尼治标准时间（GMT）的午夜零点
+// 并根据运行代码时的用户的时区进行调整
+
+// new Date(year, month, date, hours, minutes, seconds, ms)
+// 使用当前时区中的给定组件创建日期。只有前两个参数是必须的。
+//     year 应该是四位数。为了兼容性，也接受 2 位数，并将其视为 19xx，例如 98 与 1998 相同，但强烈建议始终使用 4 位数。
+//     month 计数从 0（一月）开始，到 11（十二月）结束。
+//     date 是当月的具体某一天，如果缺失，则为默认值 1。
+//     如果 hours / minutes / seconds / ms 缺失，则均为默认值 0。
+
+// 访问日期组件
+// 从 Date 对象中访问年、月等信息有多种方式：
+// getFullYear() 获取年份（4 位数）
+// getMonth() 获取月份，从 0 到 11。
+// getDate() 获取当月的具体日期，从 1 到 31，这个方法名称可能看起来有些令人疑惑。
+// getHours()，getMinutes()，getSeconds()，getMilliseconds() 获取相应的时间组件。
+
+// Date转数字
+// let date = new Date();
+// alert(+date);
+
+// Date.now()
+// 如果我们仅仅想要测量时间间隔，我们不需要 Date 对象。
+// 有一个特殊的方法 Date.now()，它会返回当前的时间戳。
+// 它相当于 new Date().getTime()，但它不会创建中间的 Date 对象。因此它更快，而且不会对垃圾回收造成额外的压力。
+// alert(Date.now());
+
+// 基准测试（Benchmarking）
+// function bench1(date1, date2) {
+// 	return date1 - date2;
+// }
+// function bench2(date1, date2) {
+// 	return date1.getTime() - date2.getTime();
+// }
+// function bench(f) {
+// 	let date1 = new Date(0);
+// 	let date2 = new Date();
+// 	let start = Date.now();
+// 	for (let i = 0; i < 100000; i++) {
+// 		f(date1, date2);
+// 	}
+// 	return Date.now() - start;
+// }
+// alert(bench(bench1)); //14
+// alert(bench(bench2)); //2
+
+// 对字符串调用 Date.parse
+// Date.parse(str) 方法可以从一个字符串中读取日期。
+// 字符串的格式应该为：YYYY-MM-DDTHH:mm:ss.sssZ，其中：
+// alert(new Date(Date.parse("2024-01-01")));
+
+// 有时我们需要更加精准的时间度量。JavaScript 自身并没有测量微秒的方法（百万分之一秒），但大多数运行环境会提供。例如：浏览器有 performance.now() 方法来给出从页面加载开始的以毫秒为单位的微秒数（精确到毫秒的小数点后三位）
+
+// 创建日期
+// 创建一个 Date 对象，日期是：Feb 20, 2012, 3:12am。时区是当地时区。
+// 使用 alert 显示结果。
+// let date = new Date("2012-02-20T03:12:00")
+// alert(date);
+
+// 显示星期数
+// 编写一个函数 getWeekDay(date) 以短格式来显示一个日期的星期数：‘MO’，‘TU’，‘WE’，‘TH’，‘FR’，‘SA’，‘SU’。
+// 例如：
+// let date = new Date(2012, 0, 3);  // 3 Jan 2012
+// function getWeekDay(date) {
+// 	let d = date.getDay();
+// 	switch (d) {
+// 		case 0:
+// 			return "SU";
+// 		case 1:
+// 			return "MO";
+// 		case 2:
+// 			return "TU";
+// 		case 3:
+// 			return "WE";
+// 		case 4:
+// 			return "TH";
+// 		case 5:
+// 			return "FR";
+// 		case 6:
+// 			return "SA";
+// 	}
+// 答案做法
+// let days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+// return days[date.getDay()];
+// }
+// alert(getWeekDay(date));        // 应该输出 "TU"
+
+// 欧洲的星期表示方法
+// 欧洲国家的星期计算是从星期一（数字 1）开始的，然后是星期二（数字 2），直到星期日（数字 7）。编写一个函数 getLocalDay(date)，并返回日期的欧洲式星期数。
+// let date = new Date(2012, 0, 3);  // 3 Jan 2012
+// function getLocalDay(date) {
+// 	return date.getDay() || 7;
+// }
+// alert(getLocalDay(date));       // 星期二，应该显示 2
+
+// 许多天之前是哪个月几号？
+// 写一个函数 getDateAgo(date, days)，返回特定日期 date 往前 days 天是哪个月的哪一天。
+// 例如，假设今天是 20 号，那么 getDateAgo(new Date(), 1) 的结果应该是 19 号，getDateAgo(new Date(), 2) 的结果应该是 18 号。
+// 跨月、年也应该是正确输出：
+// function getDateAgo(date, days) {
+// 	let d = new Date(date);
+// 	d.setDate(d.getDate() - days);
+// 	return d.getDate();
+// }
+// let date = new Date(2015, 0, 2);
+// alert(getDateAgo(date, 1)); // 1, (1 Jan 2015)
+// alert(getDateAgo(date, 2)); // 31, (31 Dec 2014)
+// alert(getDateAgo(date, 365)); // 2, (2 Jan 2014)
+// P.S. 函数不应该修改给定的 date 值。
+
+// 某月的最后一天？
+// 写一个函数 getLastDayOfMonth(year, month) 返回 month 月的最后一天。有时候是 30，有时是 31，甚至在二月的时候会是 28/29。
+// 参数：
+//     year —— 四位数的年份，比如 2012。
+//     month —— 月份，从 0 到 11。
+// function getLastDayOfMonth(year, month) {
+// 	//我的写法
+// 	// let d = new Date(year, month + 1);
+// 	// d.setDate(d.getDate() - 1);
+// 	// 答案写法 通常，日期从 1 开始，但从技术上讲，我们可以传递任何数字，日期会自动进行调整。因此，当我们传递 0 时，它的意思是“一个月的第一天的前一天”，换句话说：“上个月的最后一天”。
+// 	let d = new Date(year, month + 1, 0);
+// 	return d.getDate();
+// }
+// alert(getLastDayOfMonth(2012, 1));// = 29（闰年，二月）
+
+// 今天过去了多少秒？
+// 写一个函数 getSecondsToday()，返回今天已经过去了多少秒？
+// 例如：如果现在是 10:00 am，并且没有夏令时转换，那么：
+// 该函数应该在任意一天都能正确运行。那意味着，它不应具有“今天”的硬编码值。
+// 我的写法
+// function getSecondsToday() {
+// 	let d = new Date();
+// 	return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+// }
+// 答案写法
+// function getSecondsToday() {
+// 	let now = new Date();
+// 	// 使用当前的 day/month/year 创建一个对象
+// 	let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+// 	let diff = now - today; // ms difference
+// 	return Math.round(diff / 1000); // make seconds
+// }
+// alert(getSecondsToday());// == 36000 // (3600 * 10)
+
+// 距离明天还有多少秒？
+// 写一个函数 getSecondsToTomorrow()，返回距离明天的秒数。
+// 例如，现在是 23:00，那么：
+// P.S. 该函数应该在任意一天都能正确运行。那意味着，它不应具有“今天”的硬编码值。
+// function getSecondsToTomorrow_() {
+// 	let n = new Date();
+// 	return 24 * 3600 - n.getHours() * 3600 - n.getMinutes() * 60 - n.getSeconds();
+// }
+// function getSecondsToTomorrow() {
+// 	let now = new Date();
+// 	// tomorrow date
+// 	let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+// 	let diff = tomorrow - now; // difference in ms
+// 	return Math.round(diff / 1000); // convert to seconds
+// }
+// alert(getSecondsToTomorrow_());// == 3600
+// alert(getSecondsToTomorrow());// == 3600
+
+// 格式化相对日期
+// 写一个函数 formatDate(date)，能够对 date 进行如下格式化：
+//     如果 date 距离现在不到 1 秒，输出 "right now"。
+//     否则，如果 date 距离现在不到 1 分钟，输出 "n sec. ago"。
+//     否则，如果不到 1 小时，输出 "m min. ago"。
+//     否则，以 "DD.MM.YY HH:mm" 格式输出完整日期。即："day.month.year hours:minutes"，全部以两位数格式表示，例如：31.12.16 10:00。
+// function formatDate(date) {
+// 	let n = new Date();
+// 	let diff = n.getTime() - date.getTime();
+// 	diff = Math.floor(diff / 1000);
+// 	if (diff < 1) {
+// 		return "right now";
+// 	}
+// 	if (diff < 60) {
+// 		return diff + " sec. ago";
+// 	}
+// 	if (diff < 60 * 60) {
+// 		return Math.floor(diff / 60) + " min. ago";
+// 	}
+// 	// return `${n.getDate()}`+"."+`${n.getMonth()+1}`+"."+
+// 	// let DD = n.getDate();
+// 	// DD = DD.toString().slice(2);
+// 	// let MM = n.getMonth();
+// 	// let YY = n.getFullYear();
+// 	// let HH = n.getHours();
+// 	// let mm = n.getMinutes();
+// 	return n; //具体处理成所需格式进行字符串拼接有点麻烦，不写了
+// }
+// 举个例子：
+// alert(formatDate(new Date(new Date - 1))); // "right now"
+// alert(formatDate(new Date(new Date - 30 * 1000))); // "30 sec. ago"
+// alert(formatDate(new Date(new Date - 5 * 60 * 1000))); // "5 min. ago"
+// 昨天的日期，例如 31.12.16 20:00
+// alert(formatDate(new Date(new Date - 86400 * 1000)));
+
+
+
+// =========================== JSON 方法，toJSON =========================== //
+
+// JSON.stringify()     对象  转  JSON
+// let student = {
+// 	name: "John",
+// 	age: 30,
+// 	isAdmin: false,
+// 	courses: ["html", "css", "js"],
+// 	wife: null,
+// };
+// let json = JSON.stringify(student);
+// alert(json);
+// alert(typeof json);
+
+// 请注意，JSON 编码的对象与对象字面量有几个重要的区别：
+// 字符串使用双引号。JSON 中没有单引号或反引号。所以 'John' 被转换为 "John"。
+// 对象属性名称也是双引号的。这是强制性的。所以 age:30 被转换成 "age":30。
+// JSON.stringify 也可以应用于原始（primitive）数据类型。
+// JSON 支持以下数据类型：
+//     Objects { ... }
+//     Arrays [ ... ]
+//     Primitives：
+//         strings，
+//         numbers，
+//         boolean values true/false，
+//         null。
+// alert(JSON.stringify(["hello", "world"]));
+// alert(JSON.stringify(100));
+// alert(JSON.stringify(false));
+// alert(JSON.stringify(null));
+
+// 排除和转换：replacer
+// let room = {
+// 	number: 23,
+// };
+// let meetup = {
+// 	title: "Conference",
+// 	participants: [{ name: "John" }, { name: "Alice" }],
+// 	place: room,
+// };
+// room.occupiedBy = meetup;
+// alert(JSON.stringify(meetup, ["title", "participants"]));
+// alert(JSON.stringify(meetup, ["title", "participants", "name", "place", "number"]));
+// function replacer(key, value) {
+// 	alert(`${key}` + ", " + `${value}`);
+// 	return (key === "occupiedBy" ? key : undefined);
+// }
+// alert(JSON.stringify(meetup, replacer(key, value)));
+// alert(JSON.stringify(meetup, function replacer(key, value) {
+// 	alert(`${key}` + ", " + `${value}`);
+// 	return (key == "occupiedBy" ? undefined : value);
+// }, 2));
+// 这个replacer函数居然不能在外部定义，仅在此次调用。必须在此处定义！奇怪。
+
+// JSON.parse()       JSON   转   对象
+// let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+// let meetup = JSON.parse(str);
+// // alert(meetup.date.getDate()); // Error!
+// alert(meetup.date);
+// let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+// let meetup = JSON.parse(str, function (key, value) {
+// 	return (key == "date") ? new Date(value) : value;
+// });
+// alert(meetup.date.getDate());
+
+// 也适用于嵌套对象
+// let schedule = `{
+// 	"meetups": [
+// 		{ "title": "Conference", "date": "2017-11-30T12:00:00.000Z" },
+// 		{ "title": "Birthday", "date": "2017-04-18T12:00:00.000Z" }
+// 	]
+// }`;
+// schedule = JSON.parse(schedule, function (key, value) {
+// 	return (key == "date") ? new Date(value) : value;
+// })
+// alert(schedule.meetups[0].date.getDate());
+
+// 将对象转换为 JSON，然后再转换回来
+// 将 user 转换为 JSON，然后将其转换回到另一个变量。
+// let user = {
+// 	name: "John Smith",
+// 	age: 35
+// };
+// let str = JSON.stringify(user);
+// alert(str);
+// let user2 = JSON.parse(str);
+// alert(user.name == user2.name);
+
+// 排除反向引用
+// 在简单循环引用的情况下，我们可以通过名称排除序列化中违规的属性。
+// 但是，有时我们不能只使用名称，因为它既可能在循环引用中也可能在常规属性中使用。因此，我们可以通过属性值来检查属性。
+// 编写 replacer 函数，移除引用 meetup 的属性，并将其他所有属性序列化：
+// let room = {
+// 	number: 23
+// };
+// let meetup = {
+// 	title: "Conference",
+// 	occupiedBy: [{ name: "John" }, { name: "Alice" }],
+// 	place: room
+// };
+// // 循环引用
+// room.occupiedBy = meetup;
+// meetup.self = meetup;
+// alert(JSON.stringify(meetup, function replacer(key, value) {
+// 	/* your code */
+// 	// 需要判断 key=="" 以排除第一个调用时 value 是 meetup 的情况
+// 	if (key == "") {
+// 		return value;
+// 	}
+// 	return (value == meetup) ? undefined : value;
+// }));
+/* 结果应该是：
+{
+	"title":"Conference",
+	"occupiedBy":[{"name":"John"},{"name":"Alice"}],
+	"place":{"number":23}
+}
+*/
+
+
+
+// =========================== 函数进阶内容 =========================== //
+// =========================== 递归和堆栈 =========================== //
+// let company = { // 是同一个对象，简洁起见被压缩了
+// 	sales: [{ name: 'John', salary: 1000 }, { name: 'Alice', salary: 1600 }],
+// 	development: {
+// 		sites: [{ name: 'Peter', salary: 2000 }, { name: 'Alex', salary: 1800 }],
+// 		internals: [{ name: 'Jack', salary: 1300 }]
+// 	}
+// };
+// // 用来完成任务的函数
+// function sumSalaries(department) {
+// 	if (Array.isArray(department)) { // 情况（1）
+// 		return department.reduce((prev, current) => prev + current.salary, 0); // 求数组的和
+// 	} else { // 情况（2）
+// 		let sum = 0;
+// 		for (let subdep of Object.values(department)) {
+// 			sum += sumSalaries(subdep); // 递归调用所有子部门，对结果求和
+// 		}
+// 		return sum;
+// 	}
+// }
+// alert(sumSalaries(company)); // 7700
+
+// =========================== Rest 参数与 Spread 语法 =========================== //
+// 如何编写支持传入任意数量参数的函数，以及如何将数组作为参数传递给这类函数
+// function sum(...Rest) {
+// 	let sum = 0;
+// 	alert(arguments[0]);
+// 	alert(arguments[1]);
+// 	alert(arguments[2]);
+// 	alert(arguments[3]);
+// 	for (let i of Rest) {
+// 		sum += i;
+// 	}
+// 	return sum;
+// }
+// alert(sum(1, 2, 3));
+
+// let [a, b, c] = [1, 2, 3];
+// alert(a);
+// alert(b);
+// alert(c);
+
+// =========================== 变量作用域，闭包 =========================== //
+// function makeCounter() {
+// 	let counter = 0;
+// 	return function () {
+// 		return counter++;
+// 	}
+// }
+// let count = makeCounter();
+// alert(count()); //0
+// alert(count()); //1
+// count = makeCounter();
+// alert(count());
+// alert(count());
+// // alert(makeCounter()()); //0
+// // alert(makeCounter()()); //0
+
+// let value = "Surprise!";
+// function f() {
+// 	let value = "the closest value";
+// 	function g() {
+// 		debugger; // 在 console 中：输入 alert(value); Surprise!
+// 	}
+// 	return g;
+// }
+// let g = f();
+// g();
+
+// function Counter() {
+// 	let count = 0;
+// 	this.up = function () {
+// 		return ++count;
+// 	};
+// 	this.down = function () {
+// 		return --count;
+// 	};
+// }
+// let counter = new Counter();
+// alert(counter.up()); // 1
+// alert(counter.up()); // 2
+// alert(counter.down()); // 1
+
+// 闭包 sum
+// 编写一个像 sum(a)(b) = a+b 这样工作的 sum 函数。
+// 是的，就是这种通过双括号的方式（并不是错误）。
+// 举个例子：
+// function sum(a) {
+// 	return function f(b) {
+// 		return a + b;
+// 	}
+// }
+// alert(sum(1)(2));// = 3
+// alert(sum(5)(-1));// = 4
+
+// 变量可见吗？
+// 下面这段代码的结果会是什么？
+// P.S.这个任务有一个陷阱。解决方案并不明显。
+// let x = 1;
+// function func() {
+// 	// console.log(x); // Error 变量在定义前调用
+// 	alert(x);
+// 	let x = 2;
+// }
+// func();
+
+// 通过函数筛选
+// 我们有一个内建的数组方法 arr.filter(f)。它通过函数 f 过滤元素。如果它返回 true，那么该元素会被返回到结果数组中。
+// 制造一系列“即用型”过滤器：
+// inBetween(a, b);// —— 在 a 和 b 之间或与它们相等（包括）。
+// inArray([...]);// —— 包含在给定的数组中。
+// 用法如下所示：
+// arr.filter(inBetween(3, 6)) —— 只挑选范围在 3 到 6 的值。
+// arr.filter(inArray([1, 2, 3])) —— 只挑选与[1, 2, 3] 中的元素匹配的元素。
+// 例如：
+/* .. inBetween 和 inArray 的代码 */
+// let arr = [1, 2, 3, 4, 5, 6, 7];
+// function inBetween(a, b) {
+// 	return function (x) {
+// 		return x >= a && x <= b;
+// 	};
+// }
+// function inArray(arr) {
+// 	return function (x) {
+// 		return arr.has(x);
+// 	};
+// }
+// // alert(arr.filter(inBetween(3, 6))); // 3,4,5,6
+// // alert(arr.filter(inArray([1, 2, 10]))); // 1,2
+// // alert([1, 2, 3].has(3));
+// let a = [1, 2, 3];
+// alert(a.findIndex(2));
+// // a.findIndex(3);
+
+
+// 按字段排序
+// 我们有一组要排序的对象：
+// let users = [
+// 	{ name: "John", age: 20, surname: "Johnson" },
+// 	{ name: "Pete", age: 18, surname: "Peterson" },
+// 	{ name: "Ann", age: 19, surname: "Hathaway" }
+// ];
+// 通常的做法应该是这样的：
+// // 通过 name (Ann, John, Pete)
+// users.sort((a, b) => a.name > b.name ? 1 : -1);
+// // 通过 age (Pete, Ann, John)
+// users.sort((a, b) => a.age > b.age ? 1 : -1);
+// 我们可以让它更加简洁吗，比如这样？
+// users.sort(byField('name'));
+// users.sort(byField('age'));
+// 这样我们就只需要写 byField(fieldName)，而不是写一个函数。
+// 编写函数 byField 来实现这个需求。
+
+// 函数大军
+// 下列的代码创建了一个 shooters 数组。
+// 每个函数都应该输出其编号。但好像出了点问题……
+// function makeArmy() {
+// 	let shooters = [];
+// 	let i = 0;
+// 	while (i < 10) {在浏览器中，使用 var（而不是 let/const！）声明的全局函数和变量会成为全局对象的属性。
+// 		let shooter = function () { // 创建一个 shooter 函数，
+// 			alert(i); // 应该显示其编号
+// 		};
+// 		shooters.push(shooter); // 将此 shooter 函数添加到数组中
+// 		i++;
+// 	}
+// 	// ……返回 shooters 数组
+// 	return shooters;
+// }
+// let army = makeArmy();
+// // ……所有的 shooter 显示的都是 10，而不是它们的编号 0, 1, 2, 3...
+// army[0](); // 编号为 0 的 shooter 显示的是 10
+// army[1](); // 编号为 1 的 shooter 显示的是 10
+// army[2](); // 10，其他的也是这样。
+// 为什么所有的 shooter 显示的都是同样的值？
+// 修改代码以使得代码能够按照我们预期的那样工作。
+
+// =========================== 全局对象 =========================== //
+// 在浏览器中，使用 var（而不是 let/const！）声明的全局函数和变量会成为全局对象的属性。
+// var x = "x";
+// alert(globalThis.x);
+
+// 如果一个值非常重要，以至于你想使它在全局范围内可用，那么可以直接将其作为属性写入
+// window.x = "x";
+// alert(window.x);
+// alert(x);
+
+// =========================== 函数对象，NFE =========================== //
+// function sayHi1() {
+// 	alert("Hi1");
+// }
+// let sayHi2 = function () {
+// 	alert("Hi2");
+// }
+// alert(sayHi1.name);
+// alert(sayHi2.name); // 名称赋值的逻辑很智能。即使函数被创建时没有名字，名称赋值的逻辑也能给它赋予一个正确的名字，然后进行赋值
+// sayHi1.test = "test string";
+// alert(sayHi1.test);
+
+// 为 counter 添加 set 和 decrease 方法
+// 修改 makeCounter() 代码，使得 counter 可以进行减一和设置值的操作：
+// counter() 应该返回下一个数字（与之前的逻辑相同）。
+// counter.set(value) 应该将 count 设置为 value。
+// counter.decrease() 应该把 count 减 1。
+// 查看沙箱中的代码获取完整使用示例。
+// P.S.你可以使用闭包或者函数属性来保持当前的计数，或者两种都写。
+// function makeCounter() {
+// 	function counter() {
+// 		return counter.count++;
+// 	};
+// 	counter.count = 0;
+
+// 	counter.set = function (val) {
+// 		counter.count = val;
+// 	};
+// 	counter.decrease = function () {
+// 		counter.count--;
+// 	}
+// 	return counter;
+// }
+// let counter = makeCounter();
+// counter.count = 10;
+// alert(counter()); // 10
+// counter.set(5);
+// alert(counter()); // 5++
+// counter.decrease();
+// counter.decrease();
+// alert(counter()); // 4++
+
+// 任意数量的括号求和
+// 写一个函数 sum，它有这样的功能：
+// P.S. 提示：你可能需要创建自定义对象来为你的函数提供基本类型转换。
+// 我没有写出来
+// function sum(val1) {
+// 	return function (val2) {
+// 		return val1 + val2;
+// 	};
+// }
+// 答案写法，真是牛掰
+// function sum(a) {
+// 	let currentSum = a;
+// 	function f(b) {
+// 		currentSum += b;
+// 		return f;
+// 	}
+// 	f.toString = function () {
+// 		return currentSum;
+// 	};
+// 	return f;
+// }
+// alert(sum(1)(2)); // == 3; // 1 + 2
+// sum(1)(2)(3) == 6; // 1 + 2 + 3
+// sum(5)(-1)(2) == 6
+// sum(6)(-1)(-2)(-3) == 0
+// alert(sum(0)(1)(2)(3)(4)(5));// == 15
+//为了使整个程序无论如何都能正常工作，sum 的结果必须是函数。
+//这个函数必须将两次调用之间的当前值保存在内存中。
+//根据这个题目，当函数被用于 == 比较时必须转换成数字。函数是对象，所以转换规则会按照 对象 —— 原始值转换 章节所讲的进行，我们可以提供自己的方法来返回数字。
+
+// =========================== 调度：setTimeout 和 setInterval =========================== //
+// function sayHi(name) {
+// 	alert("Hi!" + name);
+// }
+// let timerId = setTimeout(sayHi, 2000, "Tom");
+// alert(timerId);
+// clearTimeout(timerId);
+// alert(timerId);
+
+// clearTimeout clearInterval
+// let i = 0;
+// let timerId = setInterval(() => { console.log(i); alert("tick tock"); i++; }, 2000);
+// setTimeout(() => { clearInterval(timerId); }, 7000);
+// 如果没有及时对第一次弹出的窗口点击确定，只会总共弹出新窗口2次而非3次。而且无论等多久点击第一个弹窗，都会执行2次，而非1次。奇怪，为什么？？
+// 在大多数浏览器中，包括 Chrome 和 Firefox，在显示 alert/confirm/prompt 弹窗时，内部的定时器仍旧会继续“嘀嗒”。
+// 所以，在运行上面的代码时，如果在一定时间内没有关掉 alert 弹窗，那么在你关闭弹窗后，下一个 alert 会立即显示。两次 alert 之间的时间间隔将小于 2 秒。
+
+// 零延时的 setTimeout
+// setTimeout(() => { alert("World.") });
+// alert("Hello");
+
+// let count = 0;
+// let st = +Date.now();
+// setTimeout(function rep() {
+// 	let nt = Date.now();
+// 	console.log(++count + " " + (nt - st));
+// 	st = nt;
+// 	if (count < 10) {
+// 		setTimeout(rep, 0);
+// 	}
+// }, 0);
+
+// 每秒输出一次
+// 编写一个函数 printNumbers(from, to)，使其每秒输出一个数字，数字从 from 开始，到 to 结束。
+// 使用以下两种方法来实现。
+//     使用 setInterval。
+//     使用嵌套的 setTimeout。
+// function printNumbers(from, to) {
+// 	setInterval(() => {
+// 		if (from <= to) {
+// 			console.log(from++);
+// 		}
+// 	}, 1000);
+// }
+// printNumbers(3, 7);
+// function printNumbers(from, to) {
+// 	setTimeout(function rep() {
+// 		if (from <= to) {
+// 			console.log(from++);
+// 		}
+// 		setTimeout(rep, 1000);
+// 	});
+// }
+// printNumbers(3, 7);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1652,6 +2431,12 @@
 
 
 // =========================== 第2本 浏览器：文档，事件，接口 =========================== //
+
+// =========================== 遍历 DOM =========================== //
+
+
+
+
 // =========================== Document =========================== //
 // alert(location.href);
 // if (confirm("Go to Baidu?")) {
